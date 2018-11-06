@@ -88,3 +88,5 @@ console.log('Вигоди: ' + obj.offer.features);
 console.log('Фото: ' + obj.offer.photos);
 
 console.log('Позиція Х, У: ' + obj.location.x + ', ' + obj.location.y);
+
+document.querySelector('section.map').classList.remove('map--faded');
