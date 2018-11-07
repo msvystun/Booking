@@ -7,7 +7,7 @@ function randomArray() {
     return Math.round(Math.floor(types.length * Math.random()));
 };
 
-var randomAvatar = getRandomNumber(1, 8);
+var randomAvatar = ['img/avatars/user01.png','img/avatars/user02.png','img/avatars/user03.png','img/avatars/user04.png','img/avatars/user05.png','img/avatars/user06.png','img/avatars/user07.png','img/avatars/user08.png'];
 
 var titles = ["Большая уютная квартира", "Маленькая неуютная квартира", "Огромный прекрасный дворец", "Маленький ужасный дворец", "Красивый гостевой домик", "Некрасивый негостеприимный домик", "Уютное бунгало далеко от моря", "Неуютное бунгало по колено в воде"]
 var randomTitles = titles[Math.floor(titles.length * Math.random())];
@@ -38,8 +38,22 @@ function compareRandom(a, b) {
     }
 var randomPhoto = photoLinks.sort(compareRandom);
 
-var xPosition = getRandomNumber(10, 90) + '%';
-var yPosition = getRandomNumber(130, 630);
+var xPosition = getRandomNumber(70, 1100);
+var xPosition1 = getRandomNumber(70, 1100);
+var xPosition2 = getRandomNumber(70, 1100);
+var xPosition3 = getRandomNumber(70, 1100);
+var xPosition4 = getRandomNumber(70, 1100);
+var xPosition5 = getRandomNumber(70, 1100);
+var xPosition6 = getRandomNumber(70, 1100);
+var xPosition7 = getRandomNumber(70, 1100);
+var yPosition = getRandomNumber(140, 520);
+var yPosition1 = getRandomNumber(130, 520);
+var yPosition2 = getRandomNumber(130, 520);
+var yPosition3 = getRandomNumber(130, 520);
+var yPosition4 = getRandomNumber(130, 520);
+var yPosition5 = getRandomNumber(130, 520);
+var yPosition6 = getRandomNumber(130, 520);
+var yPosition7 = getRandomNumber(130, 520);
 
 //об'єкти
 var obj = {
@@ -65,28 +79,98 @@ var obj = {
     }
 }
 
-console.log('Зображення: ' + 'img/avatars/user' + ('0' + obj.author.avatar) + '.png');
 
-console.log('Адреса: ' + obj.offer.address);
 
-console.log('Назва: ' + obj.offer.title);
+document.querySelector('section.map').classList.remove('map--faded');
 
-console.log('Тип кімнати: ' + obj.offer.rooms);
+//куда будем вставляти курсор
+var similarListElement = document.querySelector('.map__pins');
 
-console.log('Ціна: ' + obj.offer.price);
+//шаблон який будем копіювати
+var similarPinTemplate = document.querySelector('#map-card')
+    .content
+    .querySelector('div');
 
-console.log('Тип житла: ' + obj.offer.type);
+    var wizards = [
+        {
+            avatar: randomAvatar[0],
+            left: xPosition + 'px',
+            top: yPosition + 'px'
+        },
+        {
+            avatar: randomAvatar[1],
+            left: xPosition1 + 'px',
+            top: yPosition1 + 'px'
+        },
+        {
+            avatar: randomAvatar[2],
+            left: xPosition2 + 'px',
+            top: yPosition2 + 'px'
+        },
+        {
+            avatar: randomAvatar[3],
+            left: xPosition3 + 'px',
+            top: yPosition3 + 'px'
+        },
+        {
+            avatar: randomAvatar[4],
+            left: xPosition4 + 'px',
+            top: yPosition4 + 'px'
+        },
+        {
+            avatar: randomAvatar[5],
+            left: xPosition5 + 'px',
+            top: yPosition5 + 'px'
+        },
+        {
+            avatar: randomAvatar[6],
+            left: xPosition6 + 'px',
+            top: yPosition6 + 'px'
+        },
+        {
+            avatar: randomAvatar[7],
+            left: xPosition7 + 'px',
+            top: yPosition7 + 'px'
+        }
+    ];
 
-console.log('К-сть місць: ' + obj.offer.quests);
 
-console.log('Поселення: ' + obj.offer.chekin);
+    var renderWizard = function (wizard) {
+        var wizardElement = similarPinTemplate.cloneNode(true);
 
-console.log('Виселення: ' + obj.offer.chekout);
+        wizardElement.querySelector('button').style.left = wizard.left;
+        wizardElement.querySelector('button').style.top = wizard.top;
+        wizardElement.querySelector('.map__pin img').src = wizard.avatar;
 
-console.log('Вигоди: ' + obj.offer.features);
+        return wizardElement;
+    }
+    var fragment = document.createDocumentFragment();
 
-console.log('Фото: ' + obj.offer.photos);
+for (var i = 0; i < wizards.length; i++) {
+    fragment.appendChild(renderWizard(wizards[i]));
+}
+
+    similarListElement.appendChild(fragment);
+
+// console.log('Адреса: ' + obj.offer.address);
+
+// console.log('Назва: ' + obj.offer.title);
+
+// console.log('Тип кімнати: ' + obj.offer.rooms);
+
+// console.log('Ціна: ' + obj.offer.price);
+
+// console.log('Тип житла: ' + obj.offer.type);
+
+// console.log('К-сть місць: ' + obj.offer.quests);
+
+// console.log('Поселення: ' + obj.offer.chekin);
+
+// console.log('Виселення: ' + obj.offer.chekout);
+
+// console.log('Вигоди: ' + obj.offer.features);
+
+// console.log('Фото: ' + obj.offer.photos);
 
 console.log('Позиція Х, У: ' + obj.location.x + ', ' + obj.location.y);
 
-document.querySelector('section.map').classList.remove('map--faded');
